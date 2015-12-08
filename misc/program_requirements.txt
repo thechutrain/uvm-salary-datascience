@@ -1,0 +1,26 @@
+# This document outlines requirements for running the python script in a 
+# different environment, for those who are less familar with virtual environments
+
+# In order for the python scripts to work on any computer, I recommend downloading
+# "virtualenv"
+
+# open terminal and download virutalenv
+$ pip install virtualenv
+
+# cd into your file
+$ virtualenv venv
+$ source venv/bin/activate
+
+# download required scripts for my program
+
+# Selenium
+$ pip install -U selenium
+
+# beautifulsoup4
+$ pip install beautifulsoup4
+
+# pandas
+$ pip install pandas
+
+# progressbar
+$ pip install progressbar

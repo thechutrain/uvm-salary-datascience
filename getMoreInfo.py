@@ -67,8 +67,8 @@ def getMoreInfo(yes_netId_txt):
         summary = soup.find(id="directory_container")
         summary = str(summary)
         # Make two files; one if all data is there & other if data is not there
-    	all_data = open("data/allData.txt", "a")
-    	missing_data = open("data/missingData.txt", "a")
+    	all_data = open("data/allData_complete.txt", "a")
+    	missing_data = open("data/missingData_complete.txt", "a")
         try:
             info = extract_info(summary)
             # write to the allData file

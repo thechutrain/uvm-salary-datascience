@@ -51,8 +51,8 @@ def getNetId():
 		# create two csv files that selenium results will write into
 		# Yes_netId = open("yes_netId.csv", 'w')
 		# No_netId = open("no_netId.csv", 'w')
-		yes_netId = open("data/Yes_netId_full.txt", 'a')
-		no_netId = open("data/No_netId_full.txt", "a")
+		yes_netId = open("data/Yes_netId_complete.txt", 'a')
+		no_netId = open("data/No_netId_complete.txt", "a")
 
 		# get employee search term name using previous function
 		search_name = getLastFirstNames(unique_names[i])
