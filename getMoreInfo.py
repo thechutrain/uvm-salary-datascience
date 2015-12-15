@@ -34,8 +34,15 @@ def getMoreInfo(yes_netId_txt):
         primary_affiliation = re.search(
             r'Primary Affiliation:</span><span><p>(.*?)</p>', html, re.M | re.I)
         # print primary_affiliation.group(1)
+
+        # get their addresss, to see if waterman or not?
+        address = re.search(r'Postal Address:</span><span>(.*?)</span>',
+                          html, re.M | re.I)
+        building = str.split(address.group(1), "</p><p>")
+        building = building[2]
+
         return_list = [name.group(1), department.group(1).replace(
-            "&amp;", "&"), title.group(1), primary_affiliation.group(1)]
+            "&amp;", "&"), title.group(1), primary_affiliation.group(1), building]
         return return_list
 
     ############## Get the employee name & netId ############
@@ -48,6 +55,7 @@ def getMoreInfo(yes_netId_txt):
         netId = line_split[1].rstrip('\n').lstrip(' ')
         # add full_name & netId to the dictionary
         name_netId_dict[full_name] = netId
+        break
     # pprint.pprint(name_netId_dict)
 
     ############## SELENIUM & Get to the page to get the html ###############
@@ -63,12 +71,12 @@ def getMoreInfo(yes_netId_txt):
         url = url_base + netId
         browser.get(url)
         html_source = browser.page_source
-        soup = BeautifulSoup(html_source)
+        soup = BeautifulSoup(html_source, "html.parser")
         summary = soup.find(id="directory_container")
         summary = str(summary)
         # Make two files; one if all data is there & other if data is not there
-    	all_data = open("data/allData_complete.txt", "a")
-    	missing_data = open("data/missingData_complete.txt", "a")
+    	all_data = open("data/allData_complete_test.txt", "a")
+    	missing_data = open("data/missingData_complete_test.txt", "a")
         try:
             info = extract_info(summary)
             # write to the allData file
@@ -83,6 +91,8 @@ def getMoreInfo(yes_netId_txt):
             all_data.write(info[2])
             all_data.write("||")
             all_data.write(info[3])
+            all_data.write("||")
+            all_data.write(info[4])
             all_data.write("\n")
 
         except:
